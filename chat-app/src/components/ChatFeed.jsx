@@ -4,16 +4,17 @@ import MyMessage from './MyMessage'
 import TheirMessage from './TheirMessage'
 
 const ChatFeed = (props) => {
-    const { chats, activeChats, userName, messages } = props;
+    const { chats, activeChat, userName, messages } = props;
 
-    const chat = chats && chats[activeChats];
+    const chat = chats && chats[activeChat];
 
     const renderMessages = () => {
         const keys = Object.keys(messages);
+
         return keys.map((key, index) => {
             const message = messages[key];
             const lastMessagekey = index === 0 ? null : keys[index - 1];
-            const isMyMessage = userName === message.sender.userName;
+            const isMyMessage = userName === message.sender.username;
             return (
                 <div key={`msg_${index}`} style={{ width: "100%" }}>
                     <div className='message-block'>
@@ -22,15 +23,17 @@ const ChatFeed = (props) => {
                                 < MyMessage message={message} /> : <TheirMessage message={message} lastMessage={messages[lastMessagekey]} />
                         }
                     </div>
-                    <div className='read-reciepts' style={{ marginRight: isMyMessage ? "18px" : '0px', marginLeft: isMyMessage ? "0px" : "68px" }}>
+                    <div className='read-receipts' style={{ marginRight: isMyMessage ? "18px" : '0px', marginLeft: isMyMessage ? "0px" : "68px" }}>
                         read-reciepts
                     </div>
+
+                    
                 </div>
             )
         })
     }
 
-    if (!chat) return 'Loading ....';
+    if (!chat) return <div/>;
 
     return (
         <div className='chat-feed'>
@@ -39,7 +42,7 @@ const ChatFeed = (props) => {
                     {chat?.title}
                 </div>
                 <div className='chat-subtitle'>
-                    {chat.people.map((person) => `${person.person.userName}`)}
+                    {chat.people.map((person) => `${person.person.username}`)}
                 </div>
             </div>
 
@@ -47,11 +50,11 @@ const ChatFeed = (props) => {
             <div style={{ height: '100px' }} />
 
             <div className='message-form-container'>
-                <MessageForm {...props} chatId={activeChats} />
+                <MessageForm {...props} chatId={activeChat} />
             </div>
 
         </div>
     )
 }
 
-export default ChatFeed
+export default ChatFeed;
