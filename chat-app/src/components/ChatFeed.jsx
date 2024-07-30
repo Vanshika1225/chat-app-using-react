@@ -5,12 +5,16 @@ import TheirMessage from './TheirMessage'
 
 const ChatFeed = (props) => {
     const { chats, activeChat, userName, messages } = props;
+    // console.log("Chats : ", chats);
+    // console.log("activeChat : ", activeChat);
+    // console.log("userName : ", userName);
+    // console.log("messages : ", messages);
 
     const chat = chats && chats[activeChat];
+    // console.log("chat  : ", chat);
 
     const renderMessages = () => {
         const keys = Object.keys(messages);
-
         return keys.map((key, index) => {
             const message = messages[key];
             const lastMessagekey = index === 0 ? null : keys[index - 1];
@@ -26,14 +30,13 @@ const ChatFeed = (props) => {
                     <div className='read-receipts' style={{ marginRight: isMyMessage ? "18px" : '0px', marginLeft: isMyMessage ? "0px" : "68px" }}>
                         read-reciepts
                     </div>
-
-                    
                 </div>
+
             )
         })
     }
 
-    if (!chat) return <div/>;
+    if (!chat) return <div />;
 
     return (
         <div className='chat-feed'>
@@ -52,7 +55,6 @@ const ChatFeed = (props) => {
             <div className='message-form-container'>
                 <MessageForm {...props} chatId={activeChat} />
             </div>
-
         </div>
     )
 }
