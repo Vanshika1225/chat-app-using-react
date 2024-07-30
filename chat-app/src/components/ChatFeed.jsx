@@ -5,13 +5,20 @@ import TheirMessage from './TheirMessage'
 
 const ChatFeed = (props) => {
     const { chats, activeChat, userName, messages } = props;
-    // console.log("Chats : ", chats);
-    // console.log("activeChat : ", activeChat);
-    // console.log("userName : ", userName);
-    // console.log("messages : ", messages);
-
     const chat = chats && chats[activeChat];
-    // console.log("chat  : ", chat);
+
+    const renderReadReciepts = (message, isMyMessage) => {
+        return chat.people.map((person, index) => person.last_read === message.id && (
+            <div
+                key={`read-${index}`}
+                className='read_receipt'
+                style={{
+                    float: isMyMessage ? 'right' : 'left'
+                    , backgroundImage: person.person.avatar && `url(${person.person.avatar})`,
+                }}
+            />
+        ))
+    }
 
     const renderMessages = () => {
         const keys = Object.keys(messages);
@@ -28,7 +35,7 @@ const ChatFeed = (props) => {
                         }
                     </div>
                     <div className='read-receipts' style={{ marginRight: isMyMessage ? "18px" : '0px', marginLeft: isMyMessage ? "0px" : "68px" }}>
-                        read-reciepts
+                        {renderReadReciepts(message, isMyMessage)}
                     </div>
                 </div>
 

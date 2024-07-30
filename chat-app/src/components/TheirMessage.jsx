@@ -7,7 +7,7 @@ const TheirMessage = ({ lastMessage, message }) => {
     <div className='message-row'>
       {ifIsFirstMessagebyUser && (
         <div className='message-avatar'
-          styles={{ backgroundImage: 'url(' + message?.sender?.avatar }}
+        style={{ backgroundImage: message.sender && `url(${message.sender.avatar})` }}
         />
 
       )}
