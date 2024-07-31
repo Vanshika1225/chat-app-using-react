@@ -3,6 +3,7 @@ import "./App.css";
 import { ChatEngine } from "react-chat-engine";
 import "./App.css";
 import ChatFeed from "./components/ChatFeed";
+import ChatTop from "./components/ChatTop";
 import LoginForm from "./components/LoginForm";
 function App() {
   if (!localStorage.getItem("username")) return <LoginForm />;
@@ -14,6 +15,7 @@ function App() {
       userName={localStorage.getItem("username")}
       userSecret={localStorage.getItem("password")}
       renderChatFeed={(chatAppProps) => <ChatFeed {...chatAppProps} />}
+      renderChatSettingsTop={(creds, chat) => <ChatTop creds={creds} chat={chat}/>}
     />
   );
 }
