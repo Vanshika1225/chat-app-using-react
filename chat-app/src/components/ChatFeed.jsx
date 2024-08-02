@@ -7,7 +7,7 @@ const ChatFeed = (props) => {
     const { chats, activeChat, userName, messages } = props;
     const chat = chats && chats[activeChat];
     console.log(chat)
-    
+
     const renderReadReciepts = (message, isMyMessage) => {
         return chat.people.map((person, index) => person.last_read === message.id && (
             <div
@@ -39,7 +39,6 @@ const ChatFeed = (props) => {
                         {renderReadReciepts(message, isMyMessage)}
                     </div>
                 </div>
-
             )
         })
     }
